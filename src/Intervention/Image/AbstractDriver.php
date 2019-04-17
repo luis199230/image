@@ -103,7 +103,11 @@ abstract class AbstractDriver
     private function getCommandClassName($name)
     {
         $name = mb_convert_case($name[0], MB_CASE_UPPER, 'utf-8') . mb_substr($name, 1, mb_strlen($name));
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> d5ea159d62f96e82fc34242692a0e7f4f84dc156
         $drivername = $this->getDriverName();
         $classnameLocal = sprintf('\Intervention\Image\%s\Commands\%sCommand', $drivername, ucfirst($name));
         $classnameGlobal = sprintf('\Intervention\Image\Commands\%sCommand', ucfirst($name));
@@ -123,6 +127,8 @@ abstract class AbstractDriver
      * Returns name of current driver instance
      *
      * @return string
+
+     * @throws \ReflectionException
      */
     public function getDriverName()
     {

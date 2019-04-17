@@ -165,4 +165,28 @@ class Encoder extends \Intervention\Image\AbstractEncoder
 
         return $imagick->getImagesBlob();
     }
+
+
+    protected function processJp2()
+    {
+        if ( ! \Imagick::queryFormats('JP2')) {
+            throw new \Intervention\Image\Exception\NotSupportedException(
+                "JP2 format is not supported by Imagick installation."
+            );
+        }
+
+        $format = 'jp2';
+        $compression = \Imagick::COMPRESSION_JPEG2000;
+
+        $imagick = $this->image->getCore();
+        $imagick = $imagick->mergeImageLayers(\Imagick::LAYERMETHOD_MERGE);
+        $imagick->setFormat($format);
+        $imagick->setImageFormat($format);
+        $imagick->setCompression($compression);
+        $imagick->setImageCompression($compression);
+        $imagick->setImageCompressionQuality($this->quality);
+
+        return $imagick->getImagesBlob();
+    }
+
 }
